@@ -51,11 +51,17 @@ function Search() {
         {isLoading ? <div className="loader"></div> : ""}
         <InputGroup className="mb-3">
           <FormControl
+            type="search"
             className="form-inp"
             placeholder="Search with Title"
             aria-label="Recipient's username"
             aria-describedby="basic-addon2"
             onChange={(e) => setInput(e.target.value)}
+            onKeyPress={event => {
+              if (event.key === 'Enter') {
+                searchHandler(input);
+              }
+            }}
           />
           <Button
             variant="outline-primary"

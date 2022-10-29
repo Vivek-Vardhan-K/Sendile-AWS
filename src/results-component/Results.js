@@ -41,6 +41,14 @@ function Results(props) {
       NotificationManager.success("Sent to Kindle", title)
     );
   }
+
+  const searcher=()=>{
+    return !isLoading
+      ? () => {
+          props.trig(input);
+        }
+      : null
+  }
   if (props.bookData !== undefined) {
     var listItems = props.bookData.map((elem) => (
       <tr key={elem.id} scope="row">
@@ -76,11 +84,15 @@ function Results(props) {
             <td>
               <InputGroup className="mb-3 sch">
                 <FormControl
+                type="search"
                   className="form-inp extd common"
                   placeholder="Search with Title"
-                  aria-label="Recipient's username"
-                  aria-describedby="basic-addon2"
                   value={input}
+                  onKeyPress={event => {
+                    if (event.key === 'Enter') {
+                      searcher();
+                    }
+                  }}
                   onChange={(e) => {
                     setinput(e.target.value);
                   }}
@@ -89,13 +101,8 @@ function Results(props) {
                   variant="outline-primary"
                   id="button-addon2"
                   className="common"
-                  onClick={
-                    !isLoading
-                      ? () => {
-                          props.trig(input);
-                        }
-                      : null
-                  }
+                  onClick={searcher()}
+
                 >
                   {isLoading ? "searching" : "Search"}
                 </Button>
