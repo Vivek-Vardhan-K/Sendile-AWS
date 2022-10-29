@@ -28,10 +28,7 @@ function Results(props) {
       type: "SWITCH_LOADING",
     });
   };
-  console.log(props.bookData);
   const byCaller=(mirrorLink,title)=>{
-    console.log(mirrorLink);
-    console.log(email);
     axios({
       method: "post",
       url: cst.base_url+"send-to-kindle/",
@@ -45,7 +42,6 @@ function Results(props) {
     );
   }
   if (props.bookData !== undefined) {
-    console.log("came here");
     var listItems = props.bookData.map((elem) => (
       <tr key={elem.id} scope="row">
         <td className="rowdet">{elem.id}</td>

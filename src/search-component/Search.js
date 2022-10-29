@@ -26,11 +26,9 @@ function Search() {
       url: cst.base_url+`removeToken/` + token,
     });
   };
-  console.log(email);
   window.addEventListener("unload", handleTabClosing);
 
   const searchHandler = (inp) => {
-    console.log("search started!");
     dispatch({
       type: "SWITCH_LOADING",
     });

@@ -26,7 +26,6 @@ function App() {
       email: email,
     });
     axios.get("https://teleportx.herokuapp.com/getToken").then((res) => {
-      console.log(res.data);
       dispatch({
         type: "UPDATE_TOKEN",
         jwtToken: res.data,
