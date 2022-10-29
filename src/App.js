@@ -45,6 +45,7 @@ function App() {
           <Modal.Title id="contained-modal-title-vcenter">
             Kindle email required
           </Modal.Title>
+          <a href="https://drive.google.com/file/d/1Xo5WsjVPqEg96g6RR-E4uDLQy8l-hsqz/view?usp=sharing" target="_blank">ℹ Documentation to get started🡕</a>
         </Modal.Header>
         <Modal.Body>
           <h4>Please enter your Kindle email Below</h4>
