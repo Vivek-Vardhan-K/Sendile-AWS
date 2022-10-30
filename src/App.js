@@ -7,11 +7,27 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import { useState } from "react";
 import validator from "validator";
+import { GoogleLogin } from '@react-oauth/google';
+import jwtDecode from "jwt-decode";
+
+
 function App() {
   const [modalShow, setModalShow] = useState(true);
   const [email, setEmail] = useState("");
   const [validEmail, setValidEmail] = useState(true);
   const dispatch = useDispatch();
+  
+  const oAuthHandler=(userDetail)=>{
+    setValidEmail(true);
+    dispatch({
+      type: "UPDATE_EMAIL",
+      email: email,
+    });
+    setModalShow(false);
+  }
+
+
+
   const changeHandler = (e) => {
     setEmail(e.target.value);
   };
@@ -69,6 +85,16 @@ function App() {
           ) : (
             ""
           )}
+          <GoogleLogin
+            auto_select
+            onSuccess={credentialResponse => {
+              oAuthHandler(jwtDecode(credentialResponse.credential));
+              console.log(jwtDecode(credentialResponse.credential));
+            }}
+            onError={() => {
+              console.log('Login Failed');
+            }}
+          />
           <Button onClick={handleEmail}>Submit</Button>
         </Modal.Footer>
       </Modal>

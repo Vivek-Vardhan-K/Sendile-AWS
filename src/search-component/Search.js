@@ -11,6 +11,7 @@ import FormControl from "react-bootstrap/FormControl";
 import { useDispatch } from "react-redux";
 import LandFooter from "../footer/LandFooter";
 import cst from "../constants/constants";
+import AccountButton from "../account/AccountButton";
 
 function Search() {
   const [input, setInput] = useState("");
@@ -47,6 +48,7 @@ function Search() {
   if (!search)
     return (
       <div className="page-full">
+        <AccountButton/>
         <img src={logo} alt="Logo" className="logo-pos" />
         {isLoading ? <div className="loader"></div> : ""}
         <InputGroup className="mb-3">
