@@ -2,6 +2,7 @@
     border-radius: 50%;
     max-height: 50px;
     max-width: 50px;
+    margin-top: 5vh;
     margin-left: 90%;
     margin-top: 3%;
 }
@@ -10,9 +11,121 @@
     outline: 5px solid rgb(190, 182, 182);
 }
 
+.prof-img-res{
+    border-radius: 50%;
+    max-height: 50px;
+    max-width: 50px;
+    margin-top: 5vh;
+    position: absolute;
+    margin-left: 40vh;
+}
+.prof-img-res:hover{
+    outline: 5px solid rgb(190, 182, 182);
+}
 .ovrd-modal{
+    position:absolute;
     margin-top: 5%;
     margin-left: 80%;
     margin-right: 10%;
     max-width: 18%;
 }
+
+
+.unsel-butt{
+  background-color: black;
+  border-radius: 8px;
+  border-style: none;
+  box-sizing: border-box;
+  color: #0075fc;
+  cursor: pointer;
+  display: inline-block;
+  font-family: "Haas Grot Text R Web", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  width: 100%;
+  /* height: 40px; */
+  line-height: 20px;
+  list-style: none;
+  /* margin: 0; */
+  margin-bottom: 4px;
+  outline-color: black;
+  outline-width: 1px;
+  padding: 10px 10px;
+  position: relative;
+  text-align: left;
+  text-decoration: none;
+  transition: color 100ms;
+  vertical-align: baseline;
+  user-select: none;
+  /* text-shadow: 0 0 5px #0075fc; */
+}
+
+
+.unsel-butt:hover,
+.unsel-butt:focus {
+    outline: 4px solid rgb(190, 182, 182);
+}
+
+
+.tcell{
+    display: inline-block;
+    margin-left: 15px;
+}
+
+.but-img{
+    filter: invert(100%);
+    -webkit-filter: invert(100%);
+    display: inline-block;
+    margin-left: 0%;
+    max-width: 50px;
+    max-height: 50px;
+}
+
+.email-txt{
+    color: rgba(247, 247, 247, 0.466);
+}
+.blk-email-txt{
+    color: #000000;
+}
+
+.sel-butt{
+    color: #000000;
+    font-family: "Haas Grot Text R Web", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.sel-butt{
+    background-color:#0075fc;
+    border-radius: 8px;
+    border-style: none;
+    box-sizing: border-box;
+    color: #000000;
+    cursor: pointer;
+    display: inline-block;
+    font-family: "Haas Grot Text R Web", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    width: 100%;
+    /* height: 40px; */
+    line-height: 20px;
+    list-style: none;
+    /* margin: 0; */
+    margin-bottom: 4px;
+    outline-color: black;
+    outline-width: 1px;
+    padding: 10px 10px;
+    position: relative;
+    text-align: left;
+    text-decoration: none;
+    transition: color 100ms;
+    vertical-align: baseline;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+  }
+  
+  .sel-butt:hover,
+  .sel-butt:focus {
+    outline: 4px solid rgb(190, 182, 182);
+  }

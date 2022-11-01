@@ -10,7 +10,7 @@ import validator from "validator";
 import { GoogleLogin } from '@react-oauth/google';
 import jwtDecode from "jwt-decode";
 
-
+const localURL="http://localhost:5000"
 function App() {
   const [modalShow, setModalShow] = useState(true);
   const [email, setEmail] = useState("");
@@ -19,10 +19,47 @@ function App() {
   
   const oAuthHandler=(userDetail)=>{
     setValidEmail(true);
+    axios.get(localURL+"/check-user",{
+      headers:{
+        email:userDetail.email,
+      }
+    }).then(resp=>{
+      console.log(resp.data);
+      if(resp.data==true){   //user already exists
+        axios.get(localURL+"/user-by-email/",{headers:{email: userDetail.email}}).then(res=>{
+          var user=res.data;
+          dispatch({
+            type: "UPDATE_USER_DB_INFO",
+            userDBinfo: user,
+          });
+          dispatch({
+            type: "UPDATE_CURRENT_USER",
+            userOAuthDetail: userDetail,
+          });
+          console.log(user.userId);
+          axios.get(localURL+"/get-all-devices?userId="+user.userId).then(devres=>{
+            console.log(devres.data);
+            dispatch({
+              type: "UPDATE_USER_DEVICE_INFO",
+              userDeviceInfo: devres.data,
+            });
+          })
+          console.log(user);
+        });
+      }
+      else{ // new user registration
+
+      }
+      setModalShow(false);
+    })
+
+
+    
     dispatch({
       type: "UPDATE_EMAIL",
       email: email,
     });
+    
     setModalShow(false);
   }
 
@@ -89,7 +126,6 @@ function App() {
             auto_select
             onSuccess={credentialResponse => {
               oAuthHandler(jwtDecode(credentialResponse.credential));
-              console.log(jwtDecode(credentialResponse.credential));
             }}
             onError={() => {
               console.log('Login Failed');

@@ -11,6 +11,7 @@ p {
   font-weight: 300;
 }
 
+
 h1,
 h2,
 h3,
@@ -223,9 +224,29 @@ body {
   display: inlines;
   position: relative;
 }
+.rect-logo {
+  /* display: inline-block; */
+  position: absolute;
+  max-height: 7.5em;
+  margin-top: 2vh;
+  margin-left: -15vw;
+  /* position: relative; */
+  /* top: 0; */
+  /* left: -45%; */
+}
+.container {
+  display: inline-flex;
+}
 .sch {
-  min-width: 300%;
-  table-layout: fixed;
+  margin-left: -10vw;
+  margin-top: 4vh;
+}
+#btride{
+  max-height: 10px;
+}
+.acc-lcl {
+  margin-left: 90% !important;
+  margin-top: 10% !important;
 }
 .extd {
   margin-left: 6%;
@@ -234,13 +255,7 @@ body {
   margin-top: 2%;
 }
 
-.rect-logo {
-  max-height: 7.5em;
-  margin-left: 55%;
-  position: relative;
-  top: 0;
-  left: -45%;
-}
+
 .loader {
   position: fixed;
   top: 50%;

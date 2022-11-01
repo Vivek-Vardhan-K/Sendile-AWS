@@ -16,9 +16,11 @@ import {
   NotificationContainer,
   NotificationManager,
 } from "react-notifications";
+import AccountButton from "../account/AccountButton";
 
 function Results(props) {
   const [input, setinput] = useState(props.phold);
+  const[kEmail,setKEmail] = useState('');
   const isLoading = useSelector((state) => state.isLoading);
   const token = useSelector((state) => state.jwtToken);
   const email = useSelector((state) => state.email);
@@ -29,6 +31,8 @@ function Results(props) {
     });
   };
   const byCaller=(mirrorLink,title)=>{
+    setKEmail(email);
+    console.log(email);
     axios({
       method: "post",
       url: cst.base_url+"send-to-kindle/",
@@ -75,44 +79,38 @@ function Results(props) {
   }
   return (
     <div>
-      <table>
-        <tbody>
-          <tr>
-            <td>
-              <img src={logo} alt="Logo" className="rect-logo" />
-            </td>
-            <td>
-              <InputGroup className="mb-3 sch">
-                <FormControl
-                type="search"
-                  className="form-inp extd common"
-                  placeholder="Search with Title"
-                  value={input}
-                  onKeyPress={event => {
-                    if (event.key === 'Enter') {
-                      searcher();
-                    }
-                  }}
-                  onChange={(e) => {
-                    setinput(e.target.value);
-                  }}
-                />
-                <Button
-                  variant="outline-primary"
-                  id="button-addon2"
-                  className="common"
-                  onClick={searcher()}
+      <div class="container">
+        <img src={logo} alt="Logo" className="rect-logo" />
+          <InputGroup className="mb-3 sch">
+            <FormControl
+            type="search"
+              className="form-inp extd common"
+              placeholder="Search with Title"
+              value={input}
+              onKeyPress={event => {
+                if (event.key === 'Enter') {
+                  searcher();
+                }
+              }}
+              onChange={(e) => {
+                setinput(e.target.value);
+              }}
+            />
+            <Button
+              variant="outline-primary"
+              id=" btride"
+              className="common"
+              onClick={searcher()}
+            >
+              {isLoading ? "searching" : "Search"}
+            </Button>
+          </InputGroup>
 
-                >
-                  {isLoading ? "searching" : "Search"}
-                </Button>
-              </InputGroup>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-      {isLoading ? <div className="loader"></div> : ""}
-      <Table striped bordered hover>
+        {isLoading ? <div className="loader"></div> : ""}
+        <AccountButton page="results"/>
+      </div>
+        
+      <Table striped bordered hover className="tab-mod">
         <thead>
           <tr>
             <th scope="col" className="rowdet">

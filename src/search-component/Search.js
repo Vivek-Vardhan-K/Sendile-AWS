@@ -48,7 +48,7 @@ function Search() {
   if (!search)
     return (
       <div className="page-full">
-        <AccountButton/>
+        <AccountButton page="search"/>
         <img src={logo} alt="Logo" className="logo-pos" />
         {isLoading ? <div className="loader"></div> : ""}
         <InputGroup className="mb-3">
@@ -68,6 +68,7 @@ function Search() {
           <Button
             variant="outline-primary"
             id="button-addon2"
+            className="search-button"
             onClick={
               !isLoading
                 ? () => {
