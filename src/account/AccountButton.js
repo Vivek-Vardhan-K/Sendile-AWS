@@ -17,6 +17,8 @@ function AccountButton(props) {
     const handleShow = () => setShow(true);
     const dispatch = useDispatch();
     const devices = useSelector((state) => state.devicesInfo);
+    const googleDetail = useSelector((state) => state.userOAuthDetail);
+    
     const emailUpdater=()=>{
       const email='';
       devices.forEach(device=>{
@@ -53,7 +55,7 @@ function AccountButton(props) {
   return (
     <div>
       
-        <img  src="https://lh3.googleusercontent.com/a/ALm5wu1xp8mF0zFYC8Y_6QaLhu86MYIZEau9ww2HO08ysJw=s96-c" className={(props.page=="search")?"prof-img":"prof-img-res"}  onClick={handleShow}/>
+        <img  src={googleDetail.picture} className={(props.page=="search")?"prof-img":"prof-img-res"}  onClick={handleShow}/>
     
         <Modal show={show} onHide={handleClose} className='ovrd-modal'>
         <Modal.Header>

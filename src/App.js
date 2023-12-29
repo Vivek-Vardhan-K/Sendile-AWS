@@ -10,35 +10,39 @@ import validator from "validator";
 import { GoogleLogin } from '@react-oauth/google';
 import jwtDecode from "jwt-decode";
 
-const localURL="http://localhost:5000"
+const localURL="http://localhost:8080"
 function App() {
   const [modalShow, setModalShow] = useState(true);
   const [email, setEmail] = useState("");
   const [validEmail, setValidEmail] = useState(true);
   const dispatch = useDispatch();
   
-  const oAuthHandler=(userDetail)=>{
-    setValidEmail(true);
+  const oAuthHandler=(gmailDetail)=>{
+    if(gmailDetail.email_verified=="true"){
+      setValidEmail(true);
+      console.log(gmailDetail.email);
+    }
+    // console.log(gmailDetail.email);
+    console.log(gmailDetail);
     axios.get(localURL+"/check-user",{
       headers:{
-        email:userDetail.email,
+        'email': gmailDetail.email
       }
     }).then(resp=>{
-      console.log(resp.data);
+      console.log(resp);
       if(resp.data==true){   //user already exists
-        axios.get(localURL+"/user-by-email/",{headers:{email: userDetail.email}}).then(res=>{
+        axios.get(localURL+"/get-account-by-email",{headers:{email: gmailDetail.email}}).then(res=>{
           var user=res.data;
+          console.log(res);
           dispatch({
             type: "UPDATE_USER_DB_INFO",
             userDBinfo: user,
           });
           dispatch({
             type: "UPDATE_CURRENT_USER",
-            userOAuthDetail: userDetail,
+            userOAuthDetail: gmailDetail,
           });
-          console.log(user.userId);
-          axios.get(localURL+"/get-all-devices?userId="+user.userId).then(devres=>{
-            console.log(devres.data);
+          axios.get(localURL+"/get-all-devices-for-user/"+user.accountId).then(devres=>{
             dispatch({
               type: "UPDATE_USER_DEVICE_INFO",
               userDeviceInfo: devres.data,

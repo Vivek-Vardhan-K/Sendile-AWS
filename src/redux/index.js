@@ -28,7 +28,7 @@ const reducerfn = (state = obj, action) => {
   if (action.type === "UPDATE_CURRENT_USER") {
     return {
       ...state,
-      userOAuthDetail:action.userDetail,
+      userOAuthDetail:action.userOAuthDetail,
     };
   }
   if (action.type === "UPDATE_USER_DB_INFO") {
