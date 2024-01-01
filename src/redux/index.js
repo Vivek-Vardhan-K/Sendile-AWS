@@ -5,11 +5,12 @@ const obj = {
   haveToken: false,
   haveEmail: false,
   isLoading: false,
+  showMangeDevices: false,
   email: "",
-  defaultDeviceId:"",
-  userDBinfo:{},
-  userOAuthDetail:{},
-  devicesInfo:[]
+  defaultDeviceId: "",
+  userDBinfo: {},
+  userOAuthDetail: {},
+  devicesInfo: [],
 };
 const reducerfn = (state = obj, action) => {
   if (action.type === "UPDATE_TOKEN") {
@@ -22,25 +23,25 @@ const reducerfn = (state = obj, action) => {
   if (action.type === "UPDATE_DEFAULT_DEVICE") {
     return {
       ...state,
-      defaultDeviceId:action.defaultDevice,
+      defaultDeviceId: action.defaultDevice,
     };
   }
   if (action.type === "UPDATE_CURRENT_USER") {
     return {
       ...state,
-      userOAuthDetail:action.userOAuthDetail,
+      userOAuthDetail: action.userOAuthDetail,
     };
   }
   if (action.type === "UPDATE_USER_DB_INFO") {
     return {
       ...state,
-      userDBinfo:action.userDBinfo,
+      userDBinfo: action.userDBinfo,
     };
   }
   if (action.type === "UPDATE_USER_DEVICE_INFO") {
     return {
       ...state,
-      devicesInfo:action.userDeviceInfo,
+      devicesInfo: action.userDeviceInfo,
     };
   }
   if (action.type === "FORGET_TOKEN") {
@@ -63,6 +64,13 @@ const reducerfn = (state = obj, action) => {
       isLoading: !state.isLoading,
     };
   }
+  if (action.type === "SHOW_MANAGE_DEVICES") {
+    return {
+      ...state,
+      showMangeDevices: !state.showMangeDevices,
+    };
+  }
+
   return state;
 };
 const store = createStore(reducerfn);

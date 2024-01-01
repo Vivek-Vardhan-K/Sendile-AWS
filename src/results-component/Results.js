@@ -17,42 +17,44 @@ import {
   NotificationManager,
 } from "react-notifications";
 import AccountButton from "../account/AccountButton";
+import ManageDevices from "../manage-devices/ManageDevices";
 
 function Results(props) {
   const [input, setinput] = useState(props.phold);
-  const[kEmail,setKEmail] = useState('');
+  const [kEmail, setKEmail] = useState("");
   const isLoading = useSelector((state) => state.isLoading);
   const token = useSelector((state) => state.jwtToken);
   const email = useSelector((state) => state.email);
+  const curr_device = useSelector((state) => state.defaultDeviceId);
   const dispatch = useDispatch();
+  let showMangeDevices = useSelector((state) => state.showMangeDevices);
   const toSpin = () => {
     dispatch({
       type: "SWITCH_LOADING",
     });
   };
-  const byCaller=(mirrorLink,title)=>{
+  const byCaller = (mirrorLink, title) => {
     setKEmail(email);
-    console.log(email);
+    console.log(curr_device);
     axios({
       method: "post",
-      url: cst.base_url+"send-to-kindle/",
+      url: cst.base_url + "send-to-kindle/",
       data: {},
       headers: {
-        kindleEmail: email,
-        resLink: mirrorLink
+        deviceId: curr_device,
+        resLink: mirrorLink,
+        bookName: title,
       },
-    }).then(
-      NotificationManager.success("Sent to Kindle", title)
-    );
-  }
+    }).then(NotificationManager.success("Sent to Kindle", title));
+  };
 
-  const searcher=()=>{
+  const searcher = () => {
     return !isLoading
       ? () => {
           props.trig(input);
         }
-      : null
-  }
+      : null;
+  };
   if (props.bookData !== undefined) {
     var listItems = props.bookData.map((elem) => (
       <tr key={elem.id} scope="row">
@@ -69,7 +71,7 @@ function Results(props) {
               src={icon}
               className="resz zoom"
               onClick={() => {
-                byCaller(elem.mirror1,elem.title);
+                byCaller(elem.mirror1, elem.title);
               }}
             />
           </a>
@@ -77,39 +79,42 @@ function Results(props) {
       </tr>
     ));
   }
+  if (showMangeDevices) {
+    return <ManageDevices />;
+  }
   return (
     <div>
-      <div class="container">
+      <div className="container">
         <img src={logo} alt="Logo" className="rect-logo" />
-          <InputGroup className="mb-3 sch">
-            <FormControl
+        <InputGroup className="mb-3 sch">
+          <FormControl
             type="search"
-              className="form-inp extd common"
-              placeholder="Search with Title"
-              value={input}
-              onKeyPress={event => {
-                if (event.key === 'Enter') {
-                  searcher();
-                }
-              }}
-              onChange={(e) => {
-                setinput(e.target.value);
-              }}
-            />
-            <Button
-              variant="outline-primary"
-              id=" btride"
-              className="common"
-              onClick={searcher()}
-            >
-              {isLoading ? "searching" : "Search"}
-            </Button>
-          </InputGroup>
+            className="form-inp extd common"
+            placeholder="Search with Title"
+            value={input}
+            onKeyPress={(event) => {
+              if (event.key === "Enter") {
+                searcher();
+              }
+            }}
+            onChange={(e) => {
+              setinput(e.target.value);
+            }}
+          />
+          <Button
+            variant="outline-primary"
+            id=" btride"
+            className="common"
+            onClick={searcher()}
+          >
+            {isLoading ? "searching" : "Search"}
+          </Button>
+        </InputGroup>
 
         {isLoading ? <div className="loader"></div> : ""}
-        <AccountButton page="results"/>
+        <AccountButton page="results" />
       </div>
-        
+
       <Table striped bordered hover className="tab-mod">
         <thead>
           <tr>
